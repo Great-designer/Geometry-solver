@@ -3,7 +3,7 @@
 
 作为面向对象（Java）大作业感觉不错，建议未来的助教们可以考虑考虑。
 
-# 题目
+# Version 初始
 
 某人对数学有敏锐的直觉，尤其是在几何问题上。
 
@@ -17,7 +17,7 @@
 
 要求出某个角或者某条边或未知数x的值。
 
-# 基本逻辑形式
+## 基本逻辑形式
 
   * 数字。使用十进制整数表示数字。
   * 未知数字。x是唯一未知的数字。
@@ -28,8 +28,6 @@
     * 例如：Line(A, B)。
   * 角。使用Angle(Point, Point, Point)来表示一个角。
     * 例如：Angle(A,B,C)。
-  * 圆。使用Circle(Point)表示具有特定中心的圆。
-    * 例如：Circle(O)。
   * 线段长。使用LengthOf(Line)来获得特定线段的长度值。
     * 例如：LengthOf(Line(A, B))。
   * 角度。用MeasureOf(Angle)得到特定角度的度数值。
@@ -43,14 +41,12 @@
     * 例如：Parallel(Line (A, C), Line(B, D))。
   * 点在线上。使用PointLiesOnLine(Point, Line)来表示位于直线上的点。
     * 例如：PointLiesOnLine(A, Line(B, C))。
-  * 点在圆上。使用PointLiesOnCircle(Point, Circle)表示位于圆上的点。
-    * 例如：PointLiesOnCircle(A, Circle(O))。
   * 问题。使用Find(Term)来询问给定项的确切值。
     * 例如：Find(x)、Find(LengthOf(Line(A,B)))。
 
 请注意，图和文本中的所有条件都将转换为逻辑形式。你现在得到了一个只有一个问题（Find phrase）的逻辑表单列表，并希望找到解决方案。
 
-# 定理
+## 定理
 
   * 平角定理：如果点C位于AB上，则∠ACB=180∘。
   * 等腰三角形定理：在三角形ABC中，如果AB=AC，则∠ACB=∠ABC，反之亦然。
@@ -70,10 +66,8 @@
     * HL：对应斜边和对应直角边成比例的两个直角三角形相似。
     * 在相似三角形中，对应角相等，对应边成比例。
   * 平行线定理：如果两条直线平行，则同位角（corresponding）相等，内错角（alternate）相等，同旁内角（interior）互补（supplementary）。
-  * 直径相等定理：同一个圆的不同直径相等。圆的中心也是每个直径的中点。
-  * 圆上点定理：如果AB是圆O的直径，另一个点C位于圆O上，则∠ACB=90∘。
 
-# 建议
+## 建议
 
 * 逻辑形式可以嵌套。
 * 保证每个案例至少有一个好的解决方案。一个好的解决方法是：你可以用上面的定理一步一步地解决问题；每一步之后，你获得的新值都是有效表达式（这也意味着表达式中涉及的数字总是整数）；步骤数不超过4。
@@ -85,7 +79,7 @@
     * 除非在这种明显的情况下：如果B位于AC上，则可以使用∠AOC=∠AOB+∠BOC。
 * 所有的数据都来自现实世界的问题，而不是人工构建的。
 
-# 核心思路
+## 核心思路
 
 题目保证了每一步的结果依然是 expressions。
 
@@ -93,7 +87,7 @@
 
 整个过程有点像迭代加深搜索。
 
-# 注意点
+## 注意点
 
 同一个角的表示有很多种，注意要对它们建立Equal关系。
 
@@ -109,7 +103,11 @@
 
 可以用 Find 导向去优化搜索方向。不过这道题是不必要的，你把所有可以求的量求出来也是 OK 的。
 
-# 输入输出描述
+在解出 x 后，要把之前所有用 x 表示的表达式都带入一遍。
+
+复杂度为 所有状态量 * 定理数量 * 步数上限（4）。
+
+## 输入输出描述
 
 输入包含多个样例。输入的第一行包含一个整数T，即样例数。
 
@@ -119,7 +117,177 @@
 
 对于每种情况，输出一个表示答案的整数。不应该牵涉到未知的数字。
 
-# 备用题目及答案
+## 备用题目及答案
+
+题目I：
+
+```
+
+8
+A B C D E
+AC AD AB AE BC BE CD DE
+Equals(LengthOf(Line(A, C)), x-3)
+Equals(LengthOf(Line(A, B)), 16)
+Equals(LengthOf(Line(C, D)), x+5)
+Equals(LengthOf(Line(B, E)), 20)
+PointLiesOnLine(C, Line(A, D))
+PointLiesOnLine(B, Line(A, E))
+Parallel(Line(B, C), Line(E, D))
+Find(x)
+
+```
+
+答案：35
+
+题目II：
+
+```
+
+12
+A B C D F
+CB CD CA CF BD BA BF DA DF AF
+Equals(MeasureOf(Angle(F, A, D)), 20)
+Equals(LengthOf(Line(D, A)), 9)
+Equals(MeasureOf(Angle(F, A, B)), 32)
+Equals(LengthOf(Line(B, A)), 6)
+Equals(MeasureOf(Angle(A, D, B)), 40)
+PointLiesOnLine(F, Line(C, A))
+PointLiesOnLine(F, Line(B, D))
+Parallel(Line(A, D), Line(B, C))
+Equals(LengthOf(Line(A, D)), LengthOf(Line(B, C)))
+Parallel(Line(A, B), Line(D, C))
+Equals(LengthOf(Line(A, B)), LengthOf(Line(D, C)))
+Find(MeasureOf(Angle(D, B, A)))
+
+```
+
+答案：88
+
+题目III：
+
+```
+
+5
+A B C
+AB BC AC
+Equals(LengthOf(Line(A, B)), 2x-7)
+Equals(LengthOf(Line(B, C)), 4x-21)
+Equals(LengthOf(Line(A, C)), x-3)
+Equals(LengthOf(Line(A, B)), LengthOf(Line(B, C)))
+Find(LengthOf(Line(A, C)))
+
+```
+
+答案：4
+
+题目IV：
+
+```
+
+5
+A B C
+AB AC BC
+Equals(LengthOf(Line(A, C)), 3)
+Equals(LengthOf(Line(A, B)), 5)
+Equals(LengthOf(Line(B, C)), x)
+Perpendicular(Line(A, C), Line(B, C))
+Find(x)
+
+```
+
+答案：4
+
+题目V：
+
+```
+
+7
+A C B D E
+AB AC AE AD BE BC DE CD
+Equals(LengthOf(Line(A, C)), 16)
+Equals(LengthOf(Line(E, D)), 5)
+Equals(LengthOf(Line(A, B)), 12)
+PointLiesOnLine(B, Line(A, C))
+Parallel(Line(C, D), Line(B, E))
+PointLiesOnLine(E, Line(A, D))
+Find(LengthOf(Line(A, E)))
+
+```
+
+答案：15
+
+题目VI：
+
+```
+
+12
+A B C D F
+CB CD CA CF BD BA BF DA DF AF
+Equals(MeasureOf(Angle(F, A, D)), 20)
+Equals(LengthOf(Line(D, A)), 9)
+Equals(MeasureOf(Angle(F, A, B)), 32)
+Equals(LengthOf(Line(B, A)), 6)
+Equals(MeasureOf(Angle(D, B, C)), 40)
+PointLiesOnLine(F, Line(C, A))
+PointLiesOnLine(F, Line(B, D))
+Parallel(Line(A, D), Line(B, C))
+Equals(LengthOf(Line(A, D)), LengthOf(Line(B, C)))
+Parallel(Line(A, B), Line(D, C))
+Equals(LengthOf(Line(A, B)), LengthOf(Line(D, C)))
+Find(MeasureOf(Angle(A, D, C)))
+
+```
+
+答案：128
+
+题目VII：
+
+```
+
+3
+A B C
+AB AC BC
+Equals(MeasureOf(Angle(A, B, C)), 40)
+Equals(MeasureOf(Angle(C, A, B)), 25)
+Find(MeasureOf(Angle(B, C, A)))
+
+```
+
+答案：115
+
+题目VIII：
+
+```
+
+6
+D A B K G
+KG GD DA KA AB KB
+Equals(MeasureOf(Angle(B, A, D)), 3x-70)
+Equals(MeasureOf(Angle(K, G, D)), 120)
+Equals(MeasureOf(Angle(G, D, A)), x)
+Parallel(Line(K, G), Line(A, D))
+PointLiesOnLine(A, Line(K, B))
+Find(x)
+
+```
+
+答案：60
+
+# Version 圆
+
+## 新基本逻辑形式
+
+  * 圆。使用Circle(Point)表示具有特定中心的圆。
+    * 例如：Circle(O)。
+  * 点在圆上。使用PointLiesOnCircle(Point, Circle)表示位于圆上的点。
+    * 例如：PointLiesOnCircle(A, Circle(O))。
+
+## 新定理
+
+  * 直径相等定理：同一个圆的不同直径相等。圆的中心也是每个直径的中点。
+  * 圆上点定理：如果AB是圆O的直径，另一个点C位于圆O上，则∠ACB=90∘。
+
+## 新备用题目及答案
 
 题目I：
 
@@ -148,127 +316,6 @@ Find(MeasureOf(Angle(C, A, M)))
 
 ```
 
-8
-A B C D E
-AC AD AB AE BC BE CD DE
-Equals(LengthOf(Line(A, C)), x-3)
-Equals(LengthOf(Line(A, B)), 16)
-Equals(LengthOf(Line(C, D)), x+5)
-Equals(LengthOf(Line(B, E)), 20)
-PointLiesOnLine(C, Line(A, D))
-PointLiesOnLine(B, Line(A, E))
-Parallel(Line(B, C), Line(E, D))
-Find(x)
-
-```
-
-答案：35
-
-题目III：
-
-```
-
-12
-A B C D F
-CB CD CA CF BD BA BF DA DF AF
-Equals(MeasureOf(Angle(F, A, D)), 20)
-Equals(LengthOf(Line(D, A)), 9)
-Equals(MeasureOf(Angle(F, A, B)), 32)
-Equals(LengthOf(Line(B, A)), 6)
-Equals(MeasureOf(Angle(A, D, B)), 40)
-PointLiesOnLine(F, Line(C, A))
-PointLiesOnLine(F, Line(B, D))
-Parallel(Line(A, D), Line(B, C))
-Equals(LengthOf(Line(A, D)), LengthOf(Line(B, C)))
-Parallel(Line(A, B), Line(D, C))
-Equals(LengthOf(Line(A, B)), LengthOf(Line(D, C)))
-Find(MeasureOf(Angle(D, B, A)))
-
-```
-
-答案：88
-
-题目IV：
-
-```
-
-5
-A B C
-AB BC AC
-Equals(LengthOf(Line(A, B)), 2x-7)
-Equals(LengthOf(Line(B, C)), 4x-21)
-Equals(LengthOf(Line(A, C)), x-3)
-Equals(LengthOf(Line(A, B)), LengthOf(Line(B, C)))
-Find(LengthOf(Line(A, C)))
-
-```
-
-答案：4
-
-题目V：
-
-```
-
-5
-A B C
-AB AC BC
-Equals(LengthOf(Line(A, C)), 3)
-Equals(LengthOf(Line(A, B)), 5)
-Equals(LengthOf(Line(B, C)), x)
-Perpendicular(Line(A, C), Line(B, C))
-Find(x)
-
-```
-
-答案：4
-
-题目VI：
-
-```
-
-7
-A C B D E
-AB AC AE AD BE BC DE CD
-Equals(LengthOf(Line(A, C)), 16)
-Equals(LengthOf(Line(E, D)), 5)
-Equals(LengthOf(Line(A, B)), 12)
-PointLiesOnLine(B, Line(A, C))
-Parallel(Line(C, D), Line(B, E))
-PointLiesOnLine(E, Line(A, D))
-Find(LengthOf(Line(A, E)))
-
-```
-
-答案：15
-
-题目VII：
-
-```
-
-12
-A B C D F
-CB CD CA CF BD BA BF DA DF AF
-Equals(MeasureOf(Angle(F, A, D)), 20)
-Equals(LengthOf(Line(D, A)), 9)
-Equals(MeasureOf(Angle(F, A, B)), 32)
-Equals(LengthOf(Line(B, A)), 6)
-Equals(MeasureOf(Angle(D, B, C)), 40)
-PointLiesOnLine(F, Line(C, A))
-PointLiesOnLine(F, Line(B, D))
-Parallel(Line(A, D), Line(B, C))
-Equals(LengthOf(Line(A, D)), LengthOf(Line(B, C)))
-Parallel(Line(A, B), Line(D, C))
-Equals(LengthOf(Line(A, B)), LengthOf(Line(D, C)))
-Find(MeasureOf(Angle(A, D, C)))
-
-```
-
-答案：128
-
-题目VIII：
-
-```
-
 12
 A B C D E F G
 GC GD GB GF GA GE CE BF BA FA
@@ -288,41 +335,3 @@ Find(MeasureOf(Angle(B, G, E)))
 ```
 
 答案：60
-
-题目IX：
-
-```
-
-3
-A B C
-AB AC BC
-Equals(MeasureOf(Angle(A, B, C)), 40)
-Equals(MeasureOf(Angle(C, A, B)), 25)
-Find(MeasureOf(Angle(B, C, A)))
-
-```
-
-答案：115
-
-题目X：
-
-```
-
-6
-D A B K G
-KG GD DA KA AB KB
-Equals(MeasureOf(Angle(B, A, D)), 3x-70)
-Equals(MeasureOf(Angle(K, G, D)), 120)
-Equals(MeasureOf(Angle(G, D, A)), x)
-Parallel(Line(K, G), Line(A, D))
-PointLiesOnLine(A, Line(K, B))
-Find(x)
-
-```
-
-答案：60
-
-
-在解出 x 后，要把之前所有用 x 表示的表达式都带入一遍。
-
-复杂度为 所有状态量 * 定理数量 * 步数上限（4）。
