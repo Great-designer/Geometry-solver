@@ -39,7 +39,7 @@
     * 例如：Perpendicular(Line (A, C), Line(B, D))。
   * 平行。使用Parallel(Line,Line)表示两条平行线。保证各点都是有序的。
     * 例如：Parallel(Line (A, C), Line(B, D))。
-  * 点在线上。使用PointLiesOnLine(Point, Line)来表示位于直线上的点。
+  * 点在线上。使用PointLiesOnLine(Point, Line)来表示位于线段上的点。
     * 例如：PointLiesOnLine(A, Line(B, C))。
   * 问题。使用Find(Term)来询问给定项的确切值。
     * 例如：Find(x)、Find(LengthOf(Line(A,B)))。
@@ -97,29 +97,7 @@
 
 ## 备用题目及答案
 
-以下若干题目，若用到勾股或相似（全等、等腰）的时候，则应当位于下一个Version。
-
-题目I：
-
-```
-
-8
-A B C D E
-AC AD AB AE BC BE CD DE
-Equals(LengthOf(Line(A, C)), x-3)
-Equals(LengthOf(Line(A, B)), 16)
-Equals(LengthOf(Line(C, D)), x+5)
-Equals(LengthOf(Line(B, E)), 20)
-PointLiesOnLine(C, Line(A, D))
-PointLiesOnLine(B, Line(A, E))
-Parallel(Line(B, C), Line(E, D))
-Find(x)
-
-```
-
-答案：35
-
-题目II：
+题目I：三角形内角和
 
 ```
 
@@ -143,7 +121,7 @@ Find(MeasureOf(Angle(D, B, A)))
 
 答案：88
 
-题目III：
+题目II：一次方程
 
 ```
 
@@ -160,43 +138,7 @@ Find(LengthOf(Line(A, C)))
 
 答案：4
 
-题目IV：
-
-```
-
-5
-A B C
-AB AC BC
-Equals(LengthOf(Line(A, C)), 3)
-Equals(LengthOf(Line(A, B)), 5)
-Equals(LengthOf(Line(B, C)), x)
-Perpendicular(Line(A, C), Line(B, C))
-Find(x)
-
-```
-
-答案：4
-
-题目V：
-
-```
-
-7
-A C B D E
-AB AC AE AD BE BC DE CD
-Equals(LengthOf(Line(A, C)), 16)
-Equals(LengthOf(Line(E, D)), 5)
-Equals(LengthOf(Line(A, B)), 12)
-PointLiesOnLine(B, Line(A, C))
-Parallel(Line(C, D), Line(B, E))
-PointLiesOnLine(E, Line(A, D))
-Find(LengthOf(Line(A, E)))
-
-```
-
-答案：15
-
-题目VI：
+题目III：平行线同旁内角
 
 ```
 
@@ -220,7 +162,7 @@ Find(MeasureOf(Angle(A, D, C)))
 
 答案：128
 
-题目VII：
+题目IV：三角形内角和
 
 ```
 
@@ -235,7 +177,7 @@ Find(MeasureOf(Angle(B, C, A)))
 
 答案：115
 
-题目VIII：
+题目V：平行线同旁内角
 
 ```
 
@@ -283,6 +225,64 @@ Find(x)
 
 在运用一些定理时，所用的条件可能不是“完全”的。比如我们知道两条边的长度都是 2x+3，我们依然可以利用它们相等来构建 对角相等 或者 三角形全等 的关系。
 
+## 新备用题目及答案
+
+题目I：基本平行线相似
+
+```
+
+8
+A B C D E
+AC AD AB AE BC BE CD DE
+Equals(LengthOf(Line(A, C)), x-3)
+Equals(LengthOf(Line(A, B)), 16)
+Equals(LengthOf(Line(C, D)), x+5)
+Equals(LengthOf(Line(B, E)), 20)
+PointLiesOnLine(C, Line(A, D))
+PointLiesOnLine(B, Line(A, E))
+Parallel(Line(B, C), Line(E, D))
+Find(x)
+
+```
+
+答案：35
+
+题目II：勾股定理
+
+```
+
+5
+A B C
+AB AC BC
+Equals(LengthOf(Line(A, C)), 3)
+Equals(LengthOf(Line(A, B)), 5)
+Equals(LengthOf(Line(B, C)), x)
+Perpendicular(Line(A, C), Line(B, C))
+Find(x)
+
+```
+
+答案：4
+
+题目III：基本平行线相似
+
+```
+
+7
+A C B D E
+AB AC AE AD BE BC DE CD
+Equals(LengthOf(Line(A, C)), 16)
+Equals(LengthOf(Line(E, D)), 5)
+Equals(LengthOf(Line(A, B)), 12)
+PointLiesOnLine(B, Line(A, C))
+Parallel(Line(C, D), Line(B, E))
+PointLiesOnLine(E, Line(A, D))
+Find(LengthOf(Line(A, E)))
+
+```
+
+答案：15
+
 # Version III 圆
 
 ## 新基本逻辑形式
@@ -299,7 +299,7 @@ Find(x)
 
 ## 新备用题目及答案
 
-题目I：
+题目I：直角三角形全等
 
 ```
 
@@ -322,7 +322,7 @@ Find(MeasureOf(Angle(C, A, M)))
 
 答案：28
 
-题目II：
+题目II：对顶角
 
 ```
 
